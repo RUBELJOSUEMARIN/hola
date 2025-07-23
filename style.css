@@ -24,20 +24,19 @@ header {
   background: #121212;
   color: var(--text);
   display: flex;
-  justify-content: center; /* centramos el contenido */
-  padding: 15px 30px;
+  justify-content: center;
   align-items: center;
+  padding: 15px 30px;
   border-bottom: 1px solid #333;
   position: relative;
 }
 
 .logo img {
-  height: 100px;
+  height: 60px;
   width: auto;
-  max-width: 150px;
+  max-width: 180px;
   object-fit: contain;
 }
-
 
 .menu-icon,
 .user {
