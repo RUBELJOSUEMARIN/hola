@@ -3,7 +3,7 @@
   --panel: #262626;
   --text: #f0f0f0;
   --secondary: #cccccc;
-  --accent: #1e90ff; /* Azul brillante */
+  --accent: #1e90ff;
   --hover: #1572cc;
 }
 
@@ -24,18 +24,37 @@ header {
   background: #121212;
   color: var(--text);
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* centramos el contenido */
   padding: 15px 30px;
   align-items: center;
   border-bottom: 1px solid #333;
+  position: relative;
 }
 
-.logo, .menu-icon, .user {
-  color: var(--text);
+.logo img {
+  height: 40px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+
+.menu-icon,
+.user {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   text-decoration: none;
+  color: var(--text);
+}
+
+.menu-icon {
+  left: 30px;
+  font-size: 24px;
 }
 
 .user {
+  right: 30px;
   display: flex;
   align-items: center;
   gap: 10px;
