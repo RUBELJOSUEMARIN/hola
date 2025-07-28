@@ -1,3 +1,4 @@
+/* VARIABLES */
 :root {
   --bg: #1a1a1a;
   --panel: #262626;
@@ -7,6 +8,7 @@
   --hover: #1572cc;
 }
 
+/* RESET */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -19,7 +21,7 @@ body {
   color: var(--text);
 }
 
-/* Header */
+/* HEADER */
 header {
   background: #121212;
   color: var(--text);
@@ -65,12 +67,29 @@ header {
   height: 35px;
 }
 
-/* Layout general */
+.upload-btn {
+  position: absolute;
+  top: 50%;
+  right: 120px;
+  transform: translateY(-50%);
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.upload-btn:hover {
+  background: var(--hover);
+}
+
+/* LAYOUT GENERAL */
 .container {
   display: flex;
 }
 
-/* Sidebar izquierda */
+/* SIDEBAR IZQUIERDA */
 .sidebar-left {
   width: 200px;
   background: var(--panel);
@@ -112,10 +131,11 @@ header {
 .pink { background: #ff69b4; }
 .orange { background: #ffa500; }
 .yellow { background: #ffd700; }
-.gray { background: #999; }
+gray { background: #999; }
 .blue { background: #1e90ff; }
+.green { background: #00ff66; }
 
-/* Main central */
+/* MAIN */
 main {
   flex: 1;
   padding: 30px;
@@ -123,9 +143,6 @@ main {
 
 .filters {
   margin-bottom: 20px;
-  display: flex; /* Para alinear el select y el botón */
-  justify-content: space-between; /* Para separar el select y el botón */
-  align-items: center;
 }
 
 .filters select {
@@ -135,20 +152,6 @@ main {
   background: #333;
   color: var(--text);
   cursor: pointer;
-}
-
-.upload-button {
-  background-color: var(--accent);
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.upload-button:hover {
-  background-color: var(--hover);
 }
 
 .file-card {
@@ -173,9 +176,6 @@ main {
   border-radius: 50%;
   margin-top: 10px;
 }
-
-.green { background: #00ff66; }
-.orange { background: #ffa500; }
 
 .file-info img {
   width: 100%;
@@ -202,7 +202,7 @@ main {
   color: #aaa;
 }
 
-/* Sidebar derecha */
+/* SIDEBAR DERECHA */
 .sidebar-right {
   width: 120px;
   background: var(--panel);
@@ -242,8 +242,9 @@ main {
   color: var(--accent);
 }
 
-/* LOGIN */
-.login-body {
+/* LOGIN Y UPLOAD */
+.login-body,
+.upload-body {
   background-color: var(--bg);
   display: flex;
   align-items: center;
@@ -251,21 +252,27 @@ main {
   height: 100vh;
 }
 
-.login-container {
+.login-container,
+.upload-container {
   background: var(--panel);
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  width: 320px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 360px;
   text-align: center;
 }
 
-.login-container h2 {
+.login-container h2,
+.upload-container h2 {
   margin-bottom: 25px;
   color: var(--text);
 }
 
-.login-form input {
+.login-form input,
+.upload-form input[type="text"],
+.upload-form input[type="file"],
+.upload-form select,
+.upload-form textarea {
   display: block;
   width: 100%;
   padding: 12px;
@@ -276,7 +283,8 @@ main {
   border-radius: 5px;
 }
 
-.login-form button {
+.login-form button,
+.upload-form button {
   width: 100%;
   padding: 12px;
   background-color: var(--accent);
@@ -288,7 +296,8 @@ main {
   transition: background 0.3s;
 }
 
-.login-form button:hover {
+.login-form button:hover,
+.upload-form button:hover {
   background-color: var(--hover);
 }
 
@@ -307,90 +316,10 @@ main {
   text-decoration: underline;
 }
 
-/* UPLOAD PAGE STYLES */
-.upload-page-container {
-  /* Set a max-width and use margin auto for horizontal centering */
-  max-width: 900px; /* Adjust as needed based on your design preference */
-  margin: 20px auto; /* Centers the container itself horizontally */
-  padding: 0 20px; /* Add some horizontal padding */
-  display: block; /* Override display: flex from general .container if needed */
-}
-
-.upload-content-wrapper {
-  display: flex; /* Use flexbox for its content */
-  justify-content: center; /* Center the main content horizontally */
-  width: 100%; /* Take full width of its parent (.upload-page-container) */
-}
-
-.upload-main {
-  flex: 0 1 700px; /* Keep the max-width for the form */
-  padding: 30px;
-  background: var(--panel);
-  border-radius: 10px;
-  /* Remove margin: 20px auto; from here, it's now centered by flexbox on its parent */
-  margin-top: 0; /* Reset margin-top if previously set */
-  margin-bottom: 0; /* Reset margin-bottom if previously set */
-}
-
-.upload-main h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: var(--text);
-}
-
-.upload-form .form-group {
-  margin-bottom: 20px;
-}
-
 .upload-form label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: var(--secondary);
-}
-
-.upload-form input[type="text"],
-.upload-form input[type="file"],
-.upload-form select,
-.upload-form textarea {
-  width: 100%;
-  padding: 12px;
-  background: #1f1f1f;
-  border: 1px solid #333;
+  text-align: left;
+  margin-bottom: 5px;
   color: var(--text);
-  border-radius: 5px;
-  font-size: 1em;
-}
-
-.upload-form input[type="file"] {
-  padding: 8px;
-}
-
-.upload-form textarea {
-  resize: vertical;
-}
-
-.upload-form small {
-  display: block;
-  margin-top: 5px;
-  color: #888;
-  font-size: 0.85em;
-}
-
-.upload-form button[type="submit"] {
-  width: auto;
-  padding: 12px 25px;
-  background-color: var(--accent);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
-  display: block;
-  margin: 30px auto 0;
-}
-
-.upload-form button[type="submit"]:hover {
-  background-color: var(--hover);
+  font-size: 0.9em;
 }
