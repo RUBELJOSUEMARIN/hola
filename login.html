@@ -2,19 +2,45 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Iniciar Sesión</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="login-body">
-  <div class="login-container">
-    <h2>Inicia sesión en el Foro</h2>
-    <form class="login-form" action="forum.html" method="get">
-      <input type="text" name="username" placeholder="Nombre de usuario" required />
-      <input type="password" placeholder="Contraseña" required />
-      <button type="submit">Ingresar</button>
-    </form>
-    <p class="login-msg">¿No tienes cuenta? <a href="#">Regístrate</a></p>
-  </div>
+
+<div class="login-container">
+  <h2>Inicia sesión en el Foro</h2>
+
+  <form class="login-form" onsubmit="return iniciarSesion(event)">
+    <input type="text" id="username" placeholder="Nombre de usuario" required />
+    <input type="password" id="password" placeholder="Contraseña" required />
+    <button type="submit">Ingresar</button>
+  </form>
+
+  <p class="login-msg">¿No tienes cuenta? <a href="#">Regístrate</a></p>
+</div>
+
+<script>
+function iniciarSesion(event) {
+  event.preventDefault();
+
+  // Aquí podrías validar con una base de datos en el futuro
+  const usuario = document.getElementById('username').value.trim();
+  const contra = document.getElementById('password').value.trim();
+
+  if (usuario !== "" && contra !== "") {
+    // Guardar el nombre de usuario en localStorage si quieres usarlo después
+    localStorage.setItem("usuarioForo", usuario);
+    
+    // Redirige al index con sesión iniciada
+    window.location.href = "index_logged.html";
+  } else {
+    alert("Por favor ingresa usuario y contraseña.");
+  }
+
+  return false;
+}
+</script>
+
 </body>
 </html>
