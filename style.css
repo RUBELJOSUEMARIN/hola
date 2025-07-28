@@ -123,6 +123,9 @@ main {
 
 .filters {
   margin-bottom: 20px;
+  display: flex; /* Para alinear el select y el botón */
+  justify-content: space-between; /* Para separar el select y el botón */
+  align-items: center;
 }
 
 .filters select {
@@ -132,6 +135,20 @@ main {
   background: #333;
   color: var(--text);
   cursor: pointer;
+}
+
+.upload-button {
+  background-color: var(--accent);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.upload-button:hover {
+  background-color: var(--hover);
 }
 
 .file-card {
@@ -288,4 +305,80 @@ main {
 
 .login-msg a:hover {
   text-decoration: underline;
+}
+
+/* UPLOAD PAGE STYLES */
+.upload-page-container {
+  justify-content: center; /* Centra el contenido en la página de subida */
+}
+
+.upload-main {
+  flex: 0 1 700px; /* Limita el ancho del formulario */
+  padding: 30px;
+  background: var(--panel);
+  border-radius: 10px;
+  margin-top: 20px; /* Espacio desde el header */
+}
+
+.upload-main h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--text);
+}
+
+.upload-form .form-group {
+  margin-bottom: 20px;
+}
+
+.upload-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--secondary);
+}
+
+.upload-form input[type="text"],
+.upload-form input[type="file"],
+.upload-form select,
+.upload-form textarea {
+  width: 100%;
+  padding: 12px;
+  background: #1f1f1f;
+  border: 1px solid #333;
+  color: var(--text);
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.upload-form input[type="file"] {
+  padding: 8px; /* Ajuste para el input de tipo file */
+}
+
+.upload-form textarea {
+  resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.upload-form small {
+  display: block;
+  margin-top: 5px;
+  color: #888;
+  font-size: 0.85em;
+}
+
+.upload-form button[type="submit"] {
+  width: auto; /* Ajusta el ancho al contenido */
+  padding: 12px 25px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: block; /* Para centrar el botón */
+  margin: 30px auto 0; /* Centra el botón */
+}
+
+.upload-form button[type="submit"]:hover {
+  background-color: var(--hover);
 }
