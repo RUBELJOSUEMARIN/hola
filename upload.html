@@ -2,110 +2,73 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Subir Archivo</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <header>
-    <a href="index.html" class="menu-icon">☰</a>
-    <a href="index.html" class="logo">
-      <img src="Logo.png" alt="Logo" />
-    </a>
-    <a href="index.html" class="user">
-      <span>UserName</span>
-      <img src="img/avatar.png" alt="Foto de perfil"/>
-    </a>
-  </header>
+<body class="upload-body">
+  <div class="upload-container">
+    <h2>Subir Nuevo Archivo</h2>
+    <form class="upload-form" action="#" method="post" enctype="multipart/form-data">
+      <!-- 1. Archivo principal -->
+      <label>Archivo:</label>
+      <input type="file" name="file" required />
 
-  <div class="container upload-page-container">
-    <div class="upload-content-wrapper"> <main class="upload-main">
-        <h2>Subir Nuevo Archivo</h2>
-        <form class="upload-form">
-          <div class="form-group">
-            <label for="authorName">Nombre de Autor:</label>
-            <input type="text" id="authorName" name="authorName" required />
-          </div>
+      <!-- 2. Logo circular -->
+      <label>Logo (imagen circular):</label>
+      <input type="file" name="logo" accept="image/*" required />
 
-          <div class="form-group">
-            <label for="fileLogo">Logo Circular del Archivo:</label>
-            <input type="file" id="fileLogo" name="fileLogo" accept="image/*" />
-            <small>Esta imagen aparecerá junto a tu nombre de autor.</small>
-          </div>
+      <!-- 3. Nombre -->
+      <label>Nombre del Archivo:</label>
+      <input type="text" name="title" placeholder="Título" required />
 
-          <div class="form-group">
-            <label for="fileType">Tipo de Archivo:</label>
-            <select id="fileType" name="fileType" onchange="updateSubtypeOptions()">
-              <option value="">Selecciona un tipo</option>
-              <option value="video">Video</option>
-              <option value="image">Imagen</option>
-              <option value="audio">Audio</option>
-              <option value="other">Otros</option>
-            </select>
-          </div>
+      <!-- 4. Tipo y extensiones dinámicas -->
+      <label>Tipo:</label>
+      <select id="tipo-select" name="tipo" required>
+        <option value="imagen">Imagen</option>
+        <option value="video">Video</option>
+        <option value="audio">Audio</option>
+        <option value="otros">Otros</option>
+      </select>
+      <div id="extensiones-container">
+        <!-- JS inyectará aquí opciones de extensiones -->
+      </div>
 
-          <div class="form-group" id="fileSubtypeGroup" style="display: none;">
-            <label for="fileSubtype">Formato del Archivo:</label>
-            <select id="fileSubtype" name="fileSubtype">
-              </select>
-          </div>
+      <!-- 5. Descripción -->
+      <label>Descripción:</label>
+      <textarea name="description" rows="4" placeholder="Describe tu archivo..."></textarea>
 
-          <div class="form-group">
-            <label for="fileDescription">Descripción del Archivo:</label>
-            <textarea id="fileDescription" name="fileDescription" rows="5" required></textarea>
-          </div>
+      <!-- 6. Imágenes relacionadas (opcional) -->
+      <label>Imágenes Relacionadas (opcional):</label>
+      <input type="file" name="previews[]" accept="image/*" multiple />
 
-          <div class="form-group">
-            <label for="mainFile">Subir Archivo Principal:</label>
-            <input type="file" id="mainFile" name="mainFile" required />
-          </div>
-
-          <div class="form-group">
-            <label for="relatedImages">Imágenes Relacionadas (Opcional):</label>
-            <input type="file" id="relatedImages" name="relatedImages" accept="image/*" multiple />
-            <small>Estas imágenes se mostrarán como previsualizaciones.</small>
-          </div>
-
-          <button type="submit">Publicar Archivo</button>
-        </form>
-      </main>
-    </div>
+      <button type="submit">Subir Archivo</button>
+    </form>
   </div>
 
   <script>
-    function updateSubtypeOptions() {
-      const fileType = document.getElementById('fileType').value;
-      const fileSubtypeGroup = document.getElementById('fileSubtypeGroup');
-      const fileSubtype = document.getElementById('fileSubtype');
-      fileSubtype.innerHTML = ''; // Limpiar opciones anteriores
-
-      if (fileType) {
-        fileSubtypeGroup.style.display = 'block';
-        let options = [];
-        switch (fileType) {
-          case 'video':
-            options = ['mp4', 'avi', 'mov', 'mkv'];
-            break;
-          case 'image':
-            options = ['jpg', 'png', 'gif', 'bmp'];
-            break;
-          case 'audio':
-            options = ['mp3', 'wav', 'ogg', 'flac'];
-            break;
-          case 'other':
-            options = ['zip', 'rar', 'exe', 'pdf', 'doc', 'txt'];
-            break;
-        }
-        options.forEach(option => {
-          const opt = document.createElement('option');
-          opt.value = option;
-          opt.textContent = option.toUpperCase();
-          fileSubtype.appendChild(opt);
-        });
-      } else {
-        fileSubtypeGroup.style.display = 'none';
-      }
+    // Cambiar opciones de extensiones según tipo
+    const tipoSelect = document.getElementById('tipo-select');
+    const extContainer = document.getElementById('extensiones-container');
+    const opciones = {
+      imagen: ['.jpg','.png','.gif'],
+      video: ['.mp4','.avi','.mkv'],
+      audio: ['.mp3','.wav','.ogg'],
+      otros: ['.pdf','.zip','.docx']
+    };
+    function actualizarExtensiones() {
+      const tipo = tipoSelect.value;
+      extContainer.innerHTML = '<label>Extensión:</label>';
+      opciones[tipo].forEach(ext => {
+        const opt = document.createElement('option');
+        opt.value = ext;
+        opt.textContent = ext;
+        extContainer.appendChild(opt);
+      });
+      // si prefieres select en lugar de options directas, envuelve en <select>
     }
+    tipoSelect.addEventListener('change', actualizarExtensiones);
+    actualizarExtensiones();
   </script>
 </body>
 </html>
