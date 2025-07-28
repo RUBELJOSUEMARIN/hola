@@ -309,15 +309,20 @@ main {
 
 /* UPLOAD PAGE STYLES */
 .upload-page-container {
-  justify-content: center; /* Centra el contenido en la página de subida */
+  /* Remove flex-start and align-items: flex-start */
+  /* Add these to center the content horizontally */
+  justify-content: center;
+  padding: 20px; /* Add some padding around the container */
 }
 
 .upload-main {
-  flex: 0 1 700px; /* Limita el ancho del formulario */
+  flex: 0 1 700px;
   padding: 30px;
   background: var(--panel);
   border-radius: 10px;
-  margin-top: 20px; /* Espacio desde el header */
+  margin-top: 20px;
+  /* Add margin: 0 auto; to center it within its flex container */
+  margin: 20px auto; /* This will center the main content horizontally */
 }
 
 .upload-main h2 {
@@ -351,11 +356,11 @@ main {
 }
 
 .upload-form input[type="file"] {
-  padding: 8px; /* Ajuste para el input de tipo file */
+  padding: 8px;
 }
 
 .upload-form textarea {
-  resize: vertical; /* Permite redimensionar verticalmente */
+  resize: vertical;
 }
 
 .upload-form small {
@@ -366,7 +371,7 @@ main {
 }
 
 .upload-form button[type="submit"] {
-  width: auto; /* Ajusta el ancho al contenido */
+  width: auto;
   padding: 12px 25px;
   background-color: var(--accent);
   color: white;
@@ -375,8 +380,8 @@ main {
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
-  display: block; /* Para centrar el botón */
-  margin: 30px auto 0; /* Centra el botón */
+  display: block;
+  margin: 30px auto 0;
 }
 
 .upload-form button[type="submit"]:hover {
