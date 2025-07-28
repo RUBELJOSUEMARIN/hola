@@ -1,63 +1,82 @@
-.upload-container {
-  background: var(--panel);
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  width: 400px;
-  text-align: left;
-  color: var(--text);
-}
+<!-- subir.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subir Archivo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-body">
+<div class="upload-container">
+  <h2>Sube tu Archivo</h2>
+  <form class="upload-form" enctype="multipart/form-data">
 
-.upload-container h2 {
-  text-align: center;
-  margin-bottom: 25px;
-}
+    <!-- Archivo principal -->
+    <label>Archivo:</label>
+    <input type="file" name="archivo" required />
 
-.upload-form {
-  display: flex;
-  flex-direction: column;
-}
+    <!-- Logo circular -->
+    <label>Logo del archivo (circular):</label>
+    <input type="file" name="logo" accept="image/*" />
 
-.upload-form label {
-  margin-top: 12px;
-  font-size: 0.95em;
-}
+    <!-- Nombre del archivo -->
+    <label>Nombre:</label>
+    <input type="text" name="nombre" required />
 
-.upload-form input,
-.upload-form textarea,
-.upload-form select {
-  padding: 10px;
-  margin-top: 5px;
-  background: #1f1f1f;
-  border: none;
-  color: var(--text);
-  border-radius: 5px;
-}
+    <!-- Descripción -->
+    <label>Descripción:</label>
+    <textarea name="descripcion" rows="4" required></textarea>
 
-.upload-form button {
-  margin-top: 20px;
-  background: var(--accent);
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-}
+    <!-- Tipo de contenido -->
+    <label>Tipo:</label>
+    <select name="tipo" id="tipo" onchange="cambiarFormato()" required>
+      <option value="">Selecciona</option>
+      <option value="video">Video</option>
+      <option value="imagen">Imagen</option>
+      <option value="audio">Audio</option>
+      <option value="otros">Otros</option>
+    </select>
 
-.upload-form button:hover {
-  background: var(--hover);
-}
+    <!-- Formatos dinámicos -->
+    <div id="formato-contenedor" style="margin-top: 10px;"></div>
 
-.upload-button {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 10px 15px;
-  background-color: var(--accent);
-  color: white;
-  border-radius: 6px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
+    <!-- Imágenes relacionadas -->
+    <label>Imágenes relacionadas (opcional):</label>
+    <input type="file" name="preview[]" multiple accept="image/*" />
+
+    <button type="submit">Subir</button>
+  </form>
+</div>
+
+<script>
+function cambiarFormato() {
+  const tipo = document.getElementById("tipo").value;
+  const contenedor = document.getElementById("formato-contenedor");
+
+  let opciones = "";
+
+  switch (tipo) {
+    case "video":
+      opciones = ["mp4", "avi", "mov"];
+      break;
+    case "imagen":
+      opciones = ["jpg", "png", "gif", "webp"];
+      break;
+    case "audio":
+      opciones = ["mp3", "wav", "ogg"];
+      break;
+    case "otros":
+      opciones = ["zip", "pdf", "rar", "docx"];
+      break;
+    default:
+      opciones = [];
+  }
+
+  contenedor.innerHTML = opciones.length
+    ? `<label>Formato:</label><select name="formato" required>${opciones.map(f => `<option value="${f}">${f}</option>`).join('')}</select>`
+    : "";
 }
+</script>
+</body>
+</html>
