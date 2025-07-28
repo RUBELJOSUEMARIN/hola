@@ -309,20 +309,27 @@ main {
 
 /* UPLOAD PAGE STYLES */
 .upload-page-container {
-  /* Remove flex-start and align-items: flex-start */
-  /* Add these to center the content horizontally */
-  justify-content: center;
-  padding: 20px; /* Add some padding around the container */
+  /* Set a max-width and use margin auto for horizontal centering */
+  max-width: 900px; /* Adjust as needed based on your design preference */
+  margin: 20px auto; /* Centers the container itself horizontally */
+  padding: 0 20px; /* Add some horizontal padding */
+  display: block; /* Override display: flex from general .container if needed */
+}
+
+.upload-content-wrapper {
+  display: flex; /* Use flexbox for its content */
+  justify-content: center; /* Center the main content horizontally */
+  width: 100%; /* Take full width of its parent (.upload-page-container) */
 }
 
 .upload-main {
-  flex: 0 1 700px;
+  flex: 0 1 700px; /* Keep the max-width for the form */
   padding: 30px;
   background: var(--panel);
   border-radius: 10px;
-  margin-top: 20px;
-  /* Add margin: 0 auto; to center it within its flex container */
-  margin: 20px auto; /* This will center the main content horizontally */
+  /* Remove margin: 20px auto; from here, it's now centered by flexbox on its parent */
+  margin-top: 0; /* Reset margin-top if previously set */
+  margin-bottom: 0; /* Reset margin-bottom if previously set */
 }
 
 .upload-main h2 {
